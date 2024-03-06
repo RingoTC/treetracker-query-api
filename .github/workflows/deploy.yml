@@ -44,11 +44,14 @@ jobs:
               if (regex.test(branchName)) {
                 channel = branch.channel;
                 break;
-              }else{
-                console.log("No match found for branch: ", branchName);
               }
             }
-            console.log("Matched channel: ", channel);
+            if (channel === null) {
+              console.error("No channel found for branch " + branchName);
+              process.exit(1);
+            }else{
+              console.log("Matched channel: ", channel);
+            }
             console.log("::set-output name=channel::" + channel);
           '
           env:
