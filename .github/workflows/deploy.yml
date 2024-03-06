@@ -2,7 +2,7 @@ name: Deploy branches to channels
 
 on:
   push:
-    branches: '*'
+    branches: '**'
 
 env:
   node_version: 12
