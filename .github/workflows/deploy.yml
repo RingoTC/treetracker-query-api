@@ -38,7 +38,7 @@ jobs:
           content=$(cat .releaserc)
       
           channel=$(echo "$content" | jq -r --arg branch "$branch_name" '.branches[] | select(.name | test("^" + $branch + "$")) | .channel')
-      
+          echo "Matched channel: $channel"
           echo "::set-output name=channel::$channel"
         shell: bash
       
