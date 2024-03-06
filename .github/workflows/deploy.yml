@@ -32,7 +32,7 @@ jobs:
       - name: Get channel information
         id: get-channel
         run: |
-          node -e '
+          node <<EOF >> $GITHUB_OUTPUT '
             const fs = require("fs");
             const branchName = "${{steps.branch-names.outputs.current_branch}}";
             const content = fs.readFileSync(".releaserc", "utf8");
@@ -54,6 +54,7 @@ jobs:
             }
             console.log("::set-output name=channel::" + channel);
           '
+          EOF
           env:
             BRANCH_NAME: ${{ steps.branch-names.outputs.current_branch }}
         shell: bash
