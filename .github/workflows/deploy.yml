@@ -34,7 +34,7 @@ jobs:
         run: |
           node -e '
             const fs = require("fs");
-            const branchName = ${{steps.branch-names.outputs.current_branch}};
+            const branchName = "${{steps.branch-names.outputs.current_branch}}";
             const content = fs.readFileSync(".releaserc", "utf8");
             const config = JSON.parse(content);
             const branches = config.branches;
