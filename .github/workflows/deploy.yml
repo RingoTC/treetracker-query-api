@@ -32,6 +32,7 @@ jobs:
       - name: Get channel information
         id: get-channel
         run: |
+          echo "Current branch: ${{ steps.branch-names.outputs.current_branch }}"
           branch_name=${{ steps.branch-names.outputs.current_branch }}
       
           content=$(cat .releaserc)
