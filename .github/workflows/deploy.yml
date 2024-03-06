@@ -10,7 +10,7 @@ env:
 
 jobs:
   deploy:
-    name: Checking and preparing settings for jobs
+    name: Deploy branch to channel
     runs-on: ubuntu-latest
     outputs:
       branch: ${{ steps.branch-names.outputs.current_branch }}
@@ -76,10 +76,10 @@ jobs:
       # - name: Install doctl for kubernetes
       #   uses: digitalocean/action-doctl@v2
       #   with:
-      #     token: ${{ prepare.outputs.DIGITALOCEAN_TOKEN }}
+      #     token: ${{ steps.resolver.outputs.DIGITALOCEAN_TOKEN }}
 
       # - name: Save DigitalOcean kubeconfig
-      #   run: doctl kubernetes cluster kubeconfig save ${{ prepare.outputs.CLUSTER_NAME }}
+      #   run: doctl kubernetes cluster kubeconfig save ${{ steps.resolver.outputs.CLUSTER_NAME }}
 
       # - name: Update kubernetes resources
       #   run: kustomize build deployment/overlays/prod | kubectl apply -n webmap --wait -f -
