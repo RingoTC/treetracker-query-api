@@ -24,7 +24,7 @@ import HttpError from './utils/HttpError';
 
 const version = process.env.npm_package_version;
 
-const app = express();
+const app = express(); // create express app
 
 // Sentry.init({ dsn: config.sentry_dsn });
 
