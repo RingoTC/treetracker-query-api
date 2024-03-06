@@ -30,7 +30,7 @@ const app = express();
 
 app.use(
   responseTime((req, res, time) => {
-    log.warn('API took:', req.originalUrl, time);
+    log.warn('API took:', req.originalUrl, time); // test
   }),
 );
 
