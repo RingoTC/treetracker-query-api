@@ -32,14 +32,27 @@ jobs:
       - name: Get channel information
         id: get-channel
         run: |
-          echo "Current branch: ${{ steps.branch-names.outputs.current_branch }}"
-          branch_name=${{ steps.branch-names.outputs.current_branch }}
-      
-          content=$(cat .releaserc)
-      
-          channel=$(echo "$content" | jq -r --arg branch "$branch_name" '.branches[] | select(.name | test("^" + $branch + "$")) | .channel')
-          echo "Matched channel: $channel"
-          echo "::set-output name=channel::$channel"
+          node -e '
+            const fs = require("fs");
+            const branchName = process.env.BRANCH_NAME;
+            const content = fs.readFileSync(".releaserc", "utf8");
+            const config = JSON.parse(content);
+            const branches = config.branches;
+            let channel = null;
+            for (const branch of branches) {
+              const regex = new RegExp("^" + branch.name.replace("*", ".*") + "$");
+              if (regex.test(branchName)) {
+                channel = branch.channel;
+                break;
+              }else{
+                console.log("No match found for branch: ", branchName);
+              }
+            }
+            console.log("Matched channel: ", channel);
+            process.stdout.write(channel);
+          '
+          env:
+            BRANCH_NAME: ${{ steps.branch-names.outputs.current_branch }}
         shell: bash
       
 

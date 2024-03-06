@@ -5,15 +5,15 @@
       "channel": "rc"
     },
     {
-      "name":"alpha/**",
+      "name":"alpha/*",
       "channel": "alpha"
     },
     {
-      "name":"beta/**",
+      "name":"beta/*",
       "channel": "beta"
     },
     {
-      "name":"rc/**",
+      "name":"rc/*",
       "channel": "rc"
     }
   ],
