@@ -49,7 +49,7 @@ jobs:
               }
             }
             console.log("Matched channel: ", channel);
-            process.stdout.write(channel);
+            console.log("::set-output name=channel::" + channel);
           '
           env:
             BRANCH_NAME: ${{ steps.branch-names.outputs.current_branch }}
